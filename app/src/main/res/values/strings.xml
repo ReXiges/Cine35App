@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Cine35App</string>
+    <string name="loginError">Usuario invalido</string>
+</resources>
