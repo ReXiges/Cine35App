@@ -3,10 +3,14 @@ package cine35app.esteb.cine35app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class InsertMovieActivity extends AppCompatActivity {
     private EditText movieName;
@@ -18,6 +22,10 @@ public class InsertMovieActivity extends AppCompatActivity {
     private Button saveMovie;
     private Button cancel;
     private TextView info;
+    private List<Pelicula> movies;
+    private RecyclerView recyclerView;
+    private GridLayoutManager gridLayout;
+    private MoviesAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView lblPassword;
     private ArrayList<Cliente> listaUsuarios = new ArrayList<Cliente>();
     private ArrayList<Administrador> listaAdmins = new ArrayList<Administrador>();
-    DatabaseHelper dbHelper;
     private List<Cliente> clientes;
 
     @Override
@@ -42,9 +41,6 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbHelper = new DatabaseHelper(getApplicationContext());
-        dbHelper.createDatabase();
-        listaUsuarios = dbHelper.getAllClients();
         //Set the Variables with the interface information
         username = (EditText) findViewById(R.id.txtUsername);
         password = (EditText) findViewById(R.id.txtPassword);

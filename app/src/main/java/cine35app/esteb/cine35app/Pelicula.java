@@ -13,8 +13,9 @@ public class Pelicula {
     private String directores;
     private String imagen;
     private String genero;
+    private int id;
 
-    public Pelicula(String nombre, int anio, String keywords, String actores, String  directores, String i, String gen) {
+    public Pelicula(int id,String nombre, int anio, String keywords, String actores, String  directores, String i, String gen) {
         this.nombre = nombre;
         this.anio = anio;
         this.keywords = keywords;
@@ -22,8 +23,12 @@ public class Pelicula {
         this.directores = directores;
         this.imagen = i;
         this.genero = gen;
+        this.id=id;
     }
 
+    public int getId(){
+        return this.id;
+    }
     public String getNombre() {
         return nombre;
     }

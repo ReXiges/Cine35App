@@ -24,15 +24,11 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText conPassword;
     private  Button signUp;
     private TextView info;
-    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        dbHelper = new DatabaseHelper(getApplicationContext());
-        dbHelper.createDatabase();
 
         name = (EditText) findViewById(R.id.txtName);
         //lastname = (EditText) findViewById(R.id.txtLastname);
