@@ -4,23 +4,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/coments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:scrollbars="vertical" />
-
     <EditText
         android:id="@+id/coment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/coments"
-        android:layout_marginTop="59dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Coment" />
@@ -32,8 +23,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/coment"
-        android:layout_marginTop="204dp"
         android:text="Enviar" />
+
+    <ListView
+        android:id="@+id/listaComents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/submit" />
 
 
 </RelativeLayout>

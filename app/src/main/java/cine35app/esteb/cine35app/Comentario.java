@@ -1,30 +1,20 @@
 package cine35app.esteb.cine35app;
 
 public class Comentario {
-    private String fecha;
     private String descripcion;
-    private Cliente usuario;
+    private String usuario;
 
-    public Comentario(String fecha, String descripcion, Cliente usuario) {
-        this.fecha = fecha;
+    public Comentario(String descripcion, String usuario) {
         this.descripcion = descripcion;
         this.usuario = usuario;
     }
 
-    public Cliente getUsuario() {
+    public String getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Cliente usuario) {
+    public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
 
     public String getDescripcion() {

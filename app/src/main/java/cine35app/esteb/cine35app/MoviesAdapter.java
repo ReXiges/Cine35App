@@ -112,6 +112,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
                 case R.id.action_comment:
                     Intent pIntent = new Intent(context, ComentsActivity.class);
                     pIntent.putExtra("idpelicula",movies.get(pos).getId());
+                    pIntent.putExtra("user",currentUser);
                     context.startActivity(pIntent);
                     return true;
                 case R.id.action_see_data:
