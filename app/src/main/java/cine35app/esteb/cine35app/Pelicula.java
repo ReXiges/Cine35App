@@ -1,14 +1,13 @@
 package cine35app.esteb.cine35app;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Pelicula {
+public class Pelicula implements Serializable{
 
     private String nombre;
     private int anio;
     private String keywords;
-    private ArrayList<Rate> calificaciones = new ArrayList<Rate>();
-    private ArrayList<Comentario> comentarios = new ArrayList<Comentario>();
     private String actores;
     private String directores;
     private String imagen;
@@ -51,22 +50,6 @@ public class Pelicula {
 
     public void setKeywords(String keywords) {
         this.keywords = keywords;
-    }
-
-    public ArrayList<Rate> getCalificaciones() {
-        return calificaciones;
-    }
-
-    public void setCalificaciones(ArrayList<Rate> calificaciones) {
-        this.calificaciones = calificaciones;
-    }
-
-    public ArrayList<Comentario> getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(ArrayList<Comentario> comentarios) {
-        this.comentarios = comentarios;
     }
 
     public String getActores() {

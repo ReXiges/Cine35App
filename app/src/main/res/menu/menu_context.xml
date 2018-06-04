@@ -5,9 +5,6 @@
         android:id="@+id/action_favourite"
         android:title="Add to Favorite" />
     <item
-        android:id="@+id/action_rate"
-        android:title="Rate" />
-    <item
         android:id="@+id/action_comment"
         android:title="Comments" />
     <item

@@ -106,9 +106,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
                         e.printStackTrace();
                     }
                     return true;
-                case R.id.action_rate:
-                    Toast.makeText(context, movies.get(pos).getNombre()+" is rated", Toast.LENGTH_SHORT).show();
-                    return true;
                 case R.id.action_comment:
                     Intent pIntent = new Intent(context, ComentsActivity.class);
                     pIntent.putExtra("idpelicula",movies.get(pos).getId());
@@ -116,7 +113,10 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
                     context.startActivity(pIntent);
                     return true;
                 case R.id.action_see_data:
-                    Toast.makeText(context, "WIP "+movies.get(pos).getNombre(), Toast.LENGTH_SHORT).show();
+                    Intent pIntentD = new Intent(context, peliculaActivity.class);
+                    pIntentD.putExtra("pelicula",movies.get(pos));
+                    pIntentD.putExtra("user",currentUser);
+                    context.startActivity(pIntentD);
                     return true;
                 default:
             }
