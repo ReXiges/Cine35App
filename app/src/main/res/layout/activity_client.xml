@@ -44,12 +44,21 @@
         android:id="@+id/favoritos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_below="@+id/search"
-        android:layout_marginLeft="70dp"
-        android:layout_marginStart="70dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
         android:layout_marginTop="12dp"
         android:text="Ver Favoritos" />
+
+    <Button
+        android:id="@+id/agregarP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search"
+        android:layout_toLeftOf="@+id/favoritos"
+        android:layout_toStartOf="@+id/favoritos"
+        android:text="Agregar Pelicula" />
 
 </RelativeLayout>

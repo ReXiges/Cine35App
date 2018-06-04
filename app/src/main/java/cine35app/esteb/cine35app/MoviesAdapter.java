@@ -18,19 +18,18 @@ import com.bumptech.glide.Glide;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Created by AndroidBash on 09/05/2016.
- */
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder> {
 
     private Context context;
     private List<Pelicula> movies;
     private String currentUser;
+    private boolean isAdmin;
 
-    public MoviesAdapter(Context context, List<Pelicula> movies, String user) {
+    public MoviesAdapter(Context context, List<Pelicula> movies, String user, boolean isAdmin) {
         this.context = context;
         this.movies = movies;
         this.currentUser=user;
+        this.isAdmin=isAdmin;
     }
 
     @Override
@@ -96,31 +95,61 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
             Queryphp q =  new Queryphp("");
-            switch (menuItem.getItemId()) {
-                case R.id.action_favourite:
-                    Toast.makeText(context, movies.get(pos).getNombre()+" is added to favorite", Toast.LENGTH_SHORT).show();
-                    q.setQuery("addfavorite.php?id="+movies.get(pos).getId()+"&user='"+currentUser+"'");
-                    try {
-                        q.returnRequest();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    return true;
-                case R.id.action_comment:
-                    Intent pIntent = new Intent(context, ComentsActivity.class);
-                    pIntent.putExtra("idpelicula",movies.get(pos).getId());
-                    pIntent.putExtra("user",currentUser);
-                    context.startActivity(pIntent);
-                    return true;
-                case R.id.action_see_data:
-                    Intent pIntentD = new Intent(context, peliculaActivity.class);
-                    pIntentD.putExtra("pelicula",movies.get(pos));
-                    pIntentD.putExtra("user",currentUser);
-                    context.startActivity(pIntentD);
-                    return true;
-                default:
+            if(isAdmin){
+                switch (menuItem.getItemId()) {
+                    case R.id.action_favourite:
+                        Toast.makeText(context, movies.get(pos).getNombre()+" is added to favorite", Toast.LENGTH_SHORT).show();
+                        q.setQuery("addfavorite.php?id="+movies.get(pos).getId()+"&user='"+currentUser+"'");
+                        try {
+                            q.returnRequest();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return true;
+                    case R.id.action_comment:
+                        Intent pIntent = new Intent(context, ComentsActivity.class);
+                        pIntent.putExtra("idpelicula",movies.get(pos).getId());
+                        pIntent.putExtra("user",currentUser);
+                        context.startActivity(pIntent);
+                        return true;
+                    case R.id.action_see_data:
+                        Intent pIntentD = new Intent(context, MovieEditor.class);
+                        pIntentD.putExtra("pelicula",movies.get(pos));
+                        pIntentD.putExtra("edicion",true);
+                        context.startActivity(pIntentD);
+                        return true;
+                    default:
+                }
+                return false;
             }
-            return false;
+            else{
+                switch (menuItem.getItemId()) {
+                    case R.id.action_favourite:
+                        Toast.makeText(context, movies.get(pos).getNombre()+" is added to favorite", Toast.LENGTH_SHORT).show();
+                        q.setQuery("addfavorite.php?id="+movies.get(pos).getId()+"&user='"+currentUser+"'");
+                        try {
+                            q.returnRequest();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        return true;
+                    case R.id.action_comment:
+                        Intent pIntent = new Intent(context, ComentsActivity.class);
+                        pIntent.putExtra("idpelicula",movies.get(pos).getId());
+                        pIntent.putExtra("user",currentUser);
+                        context.startActivity(pIntent);
+                        return true;
+                    case R.id.action_see_data:
+                        Intent pIntentD = new Intent(context, peliculaActivity.class);
+                        pIntentD.putExtra("pelicula",movies.get(pos));
+                        pIntentD.putExtra("user",currentUser);
+                        context.startActivity(pIntentD);
+                        return true;
+                    default:
+                }
+                return false;
+            }
+
         }
     }
 }

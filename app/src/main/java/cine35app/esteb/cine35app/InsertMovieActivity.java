@@ -18,7 +18,7 @@ public class InsertMovieActivity extends AppCompatActivity {
     private EditText gender;
     private EditText year;
     private EditText actores;
-    private Button image;
+    private EditText image;
     private Button saveMovie;
     private Button cancel;
     private TextView info;
@@ -36,9 +36,8 @@ public class InsertMovieActivity extends AppCompatActivity {
         gender = (EditText) findViewById(R.id.txtGender);
         year = (EditText) findViewById(R.id.txtYear);
         actores = (EditText) findViewById(R.id.txtActors);
-        image = (Button) findViewById(R.id.btnImage);
+        image = (EditText) findViewById(R.id.imagenURL);
         saveMovie = (Button) findViewById(R.id.btnSave);
-        cancel = (Button) findViewById(R.id.btnMovieCancel);
         info = (TextView) findViewById(R.id.lblMovieInfo);
 
         saveMovie.setOnClickListener(new View.OnClickListener() {

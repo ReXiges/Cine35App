@@ -8,6 +8,6 @@
         android:id="@+id/action_comment"
         android:title="Comments" />
     <item
-        android:id="@+id/action_see_data"
-        android:title="Information" />
+    android:id="@+id/action_see_data"
+    android:title="Information" />
 </menu>

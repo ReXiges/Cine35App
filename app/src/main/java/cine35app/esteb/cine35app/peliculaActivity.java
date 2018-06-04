@@ -33,6 +33,7 @@ public class peliculaActivity extends AppCompatActivity {
     private Queryphp q= new Queryphp("");
     private Pelicula peli;
     private float totaRate=0;
+    private boolean isAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +103,10 @@ public class peliculaActivity extends AppCompatActivity {
                 }
                 return null;
             }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapter.notifyDataSetChanged();
+            }
 
         };
         asyncTask.execute();
@@ -134,6 +139,10 @@ public class peliculaActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 return null;
+            }
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                adapter.notifyDataSetChanged();
             }
 
         };

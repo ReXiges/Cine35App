@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private Button signup;
     private TextView lblUsername;
     private TextView lblPassword;
-    private ArrayList<Cliente> listaUsuarios = new ArrayList<Cliente>();
-    private ArrayList<Administrador> listaAdmins = new ArrayList<Administrador>();
     private List<Cliente> clientes;
 
 
@@ -86,14 +84,16 @@ public class MainActivity extends AppCompatActivity {
                 Cliente cliente =  new Cliente(object.getString("nombre"),object.getString("nacionalidad"),object.getString("password"),object.getString("correo"),object.getString("nombreUsuario"));
                 if( object.getString("tipo").equals("1") && pPassword.equals(cliente.getPassword()))
                 {
-                    Intent pIntent = new Intent(MainActivity.this, AdmiActivity.class);
+                    Intent pIntent = new Intent(MainActivity.this, ClientActivity.class);
                     pIntent.putExtra("usuario",object.getString("nombre"));
+                    pIntent.putExtra("admin",true);
                     startActivity(pIntent);
                 }
                 else if (pPassword.equals(cliente.getPassword()))
                 {
                     Intent pClientIntent = new Intent(MainActivity.this, ClientActivity.class);
                     pClientIntent.putExtra("usuario",object.getString("nombre"));
+                    pClientIntent.putExtra("admin",false);
                     startActivity(pClientIntent);
                 }
             }

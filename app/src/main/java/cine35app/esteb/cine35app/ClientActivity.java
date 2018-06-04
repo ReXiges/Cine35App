@@ -1,5 +1,6 @@
 package cine35app.esteb.cine35app;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,21 +30,33 @@ public class ClientActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayout;
     private MoviesAdapter adapter;
-    private String user;
+    private String user="";
     private String searchTerm="";
     boolean favoritos=false;
+    private Button agregar;
+    private boolean isAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
         Bundle extras = getIntent().getExtras();
-        user="";
-        if (extras != null) {
-            user = extras.getString("usuario");
-        }
+
         searchButton = (Button) findViewById(R.id.search);
         searchBar=(EditText) findViewById(R.id.searchBar);
         favorites=(Button) findViewById(R.id.favoritos);
+        agregar= (Button) findViewById(R.id.agregarP);
+
+        if (extras != null) {
+            user = extras.getString("usuario");
+            isAdmin=extras.getBoolean("admin");
+            if(isAdmin){
+                favorites.setVisibility(View.GONE);
+            }
+            else{
+                agregar.setVisibility(View.GONE);
+            }
+
+        }
 
         final String finalUser = user;
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -53,8 +66,16 @@ public class ClientActivity extends AppCompatActivity {
                 movies = new ArrayList<>();
                 favoritos=false;
                 getMoviesFromDB(0);
-                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser);
+                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser,isAdmin);
                 recyclerView.setAdapter(adapter);
+            }
+        });
+        agregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pIntentD = new Intent(ClientActivity.this, MovieEditor.class);
+                pIntentD.putExtra("edicion",false);
+                ClientActivity.this.startActivity(pIntentD);
             }
         });
         favorites.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +85,7 @@ public class ClientActivity extends AppCompatActivity {
                 movies = new ArrayList<>();
                 favoritos=true;
                 getMoviesFromDB(0);
-                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser);
+                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser,isAdmin);
                 recyclerView.setAdapter(adapter);
 
             }
@@ -76,7 +97,7 @@ public class ClientActivity extends AppCompatActivity {
         gridLayout = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayout);
 
-        adapter = new MoviesAdapter(this, movies,user);
+        adapter = new MoviesAdapter(this, movies,user,isAdmin);
         recyclerView.setAdapter(adapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -104,15 +125,13 @@ public class ClientActivity extends AppCompatActivity {
                 }
                 try {
                     Response response = query.returnRequest();
-
-                    JSONArray array = new JSONArray(response.body().string());
-
+                    String t=response.body().string();
+                    JSONArray array = new JSONArray(t);
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject object = array.getJSONObject(i);
 
                         Pelicula movie = new Pelicula(object.getInt("idMovie"),object.getString("nombre"),object.getInt("anio"),object.getString("keywords"),object.getString("actores"),object.getString("directores"),object.getString("imagen"),object.getString("genero"),object.getString("sinopsis"));
-
                         ClientActivity.this.movies.add(movie);
                     }
 
