@@ -4,4 +4,5 @@
     <string name="title_activity_coments">Coments</string>
     <string name="title_activity_pelicula">peliculaActivity</string>
     <string name="title_activity_movie_editor">MovieEditor</string>
+    <string name="title_activity_baneo">BaneoActivity</string>
 </resources>

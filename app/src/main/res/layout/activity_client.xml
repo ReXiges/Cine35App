@@ -57,8 +57,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search"
-        android:layout_toLeftOf="@+id/favoritos"
-        android:layout_toStartOf="@+id/favoritos"
+        android:layout_toLeftOf="@+id/gestion"
+        android:layout_toStartOf="@+id/gestion"
         android:text="Agregar Pelicula" />
+
+    <Button
+        android:id="@+id/gestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/agregarP"
+        android:layout_alignBottom="@+id/agregarP"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="Baneo de usuarios" />
+
+    <Button
+        android:id="@+id/recommend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/favoritos"
+        android:layout_alignBottom="@+id/favoritos"
+        android:layout_toLeftOf="@+id/gestion"
+        android:layout_toStartOf="@+id/gestion"
+        android:text="Recomendaciones" />
 
 </RelativeLayout>

@@ -35,6 +35,8 @@ public class ClientActivity extends AppCompatActivity {
     boolean favoritos=false;
     private Button agregar;
     private boolean isAdmin;
+    private Button recommend;
+    private Button gestion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +47,19 @@ public class ClientActivity extends AppCompatActivity {
         searchBar=(EditText) findViewById(R.id.searchBar);
         favorites=(Button) findViewById(R.id.favoritos);
         agregar= (Button) findViewById(R.id.agregarP);
+        recommend=(Button) findViewById(R.id.recommend);
+        gestion= (Button) findViewById(R.id.gestion);
 
         if (extras != null) {
             user = extras.getString("usuario");
             isAdmin=extras.getBoolean("admin");
             if(isAdmin){
                 favorites.setVisibility(View.GONE);
+                recommend.setVisibility(View.GONE);
             }
             else{
                 agregar.setVisibility(View.GONE);
+                gestion.setVisibility(View.GONE);
             }
 
         }
@@ -88,6 +94,13 @@ public class ClientActivity extends AppCompatActivity {
                 adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser,isAdmin);
                 recyclerView.setAdapter(adapter);
 
+            }
+        });
+        gestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pIntentD = new Intent(ClientActivity.this, BaneoActivity.class);
+                ClientActivity.this.startActivity(pIntentD);
             }
         });
         recyclerView = (RecyclerView) findViewById(R.id.coments);

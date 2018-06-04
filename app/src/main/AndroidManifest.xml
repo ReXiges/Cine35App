@@ -18,11 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AdmiActivity" />
         <activity android:name=".ClientActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".InsertMovieActivity" />
-        <activity android:name=".UserManagmentActivity" />
         <activity
             android:name=".ComentsActivity"
             android:label="@string/title_activity_coments"
@@ -34,6 +31,10 @@
         <activity
             android:name=".MovieEditor"
             android:label="@string/title_activity_movie_editor"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".BaneoActivity"
+            android:label="@string/title_activity_baneo"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
