@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,7 @@ public class ComentsActivity extends AppCompatActivity {
     private List<String> comentarios = new ArrayList<>();
     private ListView list;
     private ArrayAdapter<String> adapter;
+    private boolean banned=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +46,41 @@ public class ComentsActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Queryphp q= new Queryphp("insertComment.php?id="+idpelicula+"&user="+user+"&content="+comentSubmit.getText().toString());
+                Queryphp us= new Queryphp("login.php?nombreUsuario='" + user+"'");
+
                 try {
-                    q.returnRequest();
+                    Response response= us.returnRequest();
+                    JSONArray array = new JSONArray(response.body().string());
+                    JSONObject object = array.getJSONObject(0);
+                    System.out.println(object.getInt("ban"));
+                    if(object.getInt("ban")==1){
+                        banned=false;
+                    }
+                    else{
+                        banned=true;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                comentarios = new ArrayList<>();
-                getComentsFromDB();
-                adapter= new ArrayAdapter<String>(ComentsActivity.this,android.R.layout.simple_list_item_1,comentarios);
-                list.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(banned){
+                    Queryphp q= new Queryphp("insertComment.php?id="+idpelicula+"&user="+user+"&content="+comentSubmit.getText().toString());
+                    try {
+                        q.returnRequest();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    comentarios = new ArrayList<>();
+                    getComentsFromDB();
+                    adapter= new ArrayAdapter<String>(ComentsActivity.this,android.R.layout.simple_list_item_1,comentarios);
+                    list.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(ComentsActivity.this, "usted esta baneado", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
         Bundle extras = getIntent().getExtras();

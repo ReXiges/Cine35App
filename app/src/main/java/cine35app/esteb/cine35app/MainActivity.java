@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     //Procedure to logIn as Admi or client
     private void validate(String pUsername, String pPassword)
     {
-        Queryphp query = new Queryphp("login.php?nombreUsuario='" + pUsername+"'&password='"+pPassword+"'");
+        Queryphp query = new Queryphp("login.php?nombreUsuario='" + pUsername+"'");
         try{
             Response response= query.returnRequest();
             JSONArray array = new JSONArray(response.body().string());
