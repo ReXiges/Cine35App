@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Administrador> listaAdmins = new ArrayList<Administrador>();
     private List<Cliente> clientes;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         signup = (Button) findViewById(R.id.btnSignUp);
         lblUsername = (TextView) findViewById(R.id.lblUsername);
         lblPassword = (TextView) findViewById(R.id.lblPassword);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override

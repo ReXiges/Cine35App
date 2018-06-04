@@ -13,8 +13,9 @@ public class Pelicula implements Serializable{
     private String imagen;
     private String genero;
     private int id;
+    private String sinopsis;
 
-    public Pelicula(int id,String nombre, int anio, String keywords, String actores, String  directores, String i, String gen) {
+    public Pelicula(int id,String nombre, int anio, String keywords, String actores, String  directores, String i, String gen, String sinopsis) {
         this.nombre = nombre;
         this.anio = anio;
         this.keywords = keywords;
@@ -23,6 +24,14 @@ public class Pelicula implements Serializable{
         this.imagen = i;
         this.genero = gen;
         this.id=id;
+        this.sinopsis=sinopsis;
+    }
+    public String getSinopsis(){
+        return sinopsis;
+    }
+
+    public void setSinopsis(String sinopsis){
+        this.sinopsis=sinopsis;
     }
 
     public int getId(){

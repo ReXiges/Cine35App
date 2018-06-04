@@ -70,6 +70,7 @@ public class peliculaActivity extends AppCompatActivity {
         info.add("Genero: "+peli.getGenero());
         getAllRatesFromDB(peli.getId());
         info.add("Calificacion: Calculando");
+        info.add("Sinopsis \n"+peli.getSinopsis());
         adapter= new ArrayAdapter<String>(peliculaActivity.this,android.R.layout.simple_list_item_1,info);
         list.setAdapter(adapter);
     }

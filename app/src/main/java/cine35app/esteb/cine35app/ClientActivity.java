@@ -111,7 +111,7 @@ public class ClientActivity extends AppCompatActivity {
 
                         JSONObject object = array.getJSONObject(i);
 
-                        Pelicula movie = new Pelicula(object.getInt("idMovie"),object.getString("nombre"),object.getInt("anio"),object.getString("keywords"),object.getString("actores"),object.getString("directores"),object.getString("imagen"),object.getString("genero"));
+                        Pelicula movie = new Pelicula(object.getInt("idMovie"),object.getString("nombre"),object.getInt("anio"),object.getString("keywords"),object.getString("actores"),object.getString("directores"),object.getString("imagen"),object.getString("genero"),object.getString("sinopsis"));
 
                         ClientActivity.this.movies.add(movie);
                     }
