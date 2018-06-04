@@ -85,11 +85,13 @@ public class MainActivity extends AppCompatActivity {
                 if( object.getString("tipo").equals("1") && pPassword.equals(cliente.getPassword()))
                 {
                     Intent pIntent = new Intent(MainActivity.this, AdmiActivity.class);
+                    pIntent.putExtra("usuario",object.getString("nombre"));
                     startActivity(pIntent);
                 }
                 else if (pPassword.equals(cliente.getPassword()))
                 {
                     Intent pClientIntent = new Intent(MainActivity.this, ClientActivity.class);
+                    pClientIntent.putExtra("usuario",object.getString("nombre"));
                     startActivity(pClientIntent);
                 }
             }

@@ -5,9 +5,12 @@
         android:id="@+id/action_favourite"
         android:title="Add to Favorite" />
     <item
-        android:id="@+id/action_watch"
-        android:title="Watch Movie" />
+        android:id="@+id/action_rate"
+        android:title="Rate" />
     <item
-        android:id="@+id/action_book"
-        android:title="Book Ticket" />
+        android:id="@+id/action_comment"
+        android:title="Comments" />
+    <item
+        android:id="@+id/action_see_data"
+        android:title="Information" />
 </menu>

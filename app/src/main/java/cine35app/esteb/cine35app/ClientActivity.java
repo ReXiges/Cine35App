@@ -20,7 +20,7 @@ import java.util.List;
 import okhttp3.Response;
 
 public class ClientActivity extends AppCompatActivity {
-    private EditText search;
+    private EditText searchBar;
     private Button searchButton;
     private Button signOut;
     private Button recomendations;
@@ -29,19 +29,54 @@ public class ClientActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private GridLayoutManager gridLayout;
     private MoviesAdapter adapter;
+    private String user;
+    private String searchTerm="";
+    boolean favoritos=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-        signOut = (Button) findViewById(R.id.btnSignOut);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        Bundle extras = getIntent().getExtras();
+        user="";
+        if (extras != null) {
+            user = extras.getString("usuario");
+        }
+        searchButton = (Button) findViewById(R.id.search);
+        searchBar=(EditText) findViewById(R.id.searchBar);
+        favorites=(Button) findViewById(R.id.favoritos);
+
+        final String finalUser = user;
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchTerm=searchBar.getText().toString();
+                movies = new ArrayList<>();
+                favoritos=false;
+                getMoviesFromDB(0);
+                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+        favorites.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchTerm="";
+                movies = new ArrayList<>();
+                favoritos=true;
+                getMoviesFromDB(0);
+                adapter = new MoviesAdapter(ClientActivity.this, movies, finalUser);
+                recyclerView.setAdapter(adapter);
+
+            }
+        });
+        recyclerView = (RecyclerView) findViewById(R.id.coments);
         movies = new ArrayList<>();
         getMoviesFromDB(0);
 
         gridLayout = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(gridLayout);
 
-        adapter = new MoviesAdapter(this, movies);
+        adapter = new MoviesAdapter(this, movies,user);
         recyclerView.setAdapter(adapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -60,8 +95,13 @@ public class ClientActivity extends AppCompatActivity {
         AsyncTask<Integer, Void, Void> asyncTask = new AsyncTask<Integer, Void, Void>() {
             @Override
             protected Void doInBackground(Integer... movieIds) {
-
-                Queryphp query = new Queryphp("recuperarPelis.php?id=" + movieIds[0]);
+                Queryphp query;
+                if (favoritos){
+                    query = new Queryphp("recuperarPelisF.php?id=" + movieIds[0]+"&user="+user);
+                }
+                else{
+                    query = new Queryphp("recuperarPelis.php?id=" + movieIds[0]+"&search="+searchTerm);
+                }
                 try {
                     Response response = query.returnRequest();
 
@@ -73,7 +113,7 @@ public class ClientActivity extends AppCompatActivity {
 
                         Pelicula movie = new Pelicula(object.getInt("idMovie"),object.getString("nombre"),object.getInt("anio"),object.getString("keywords"),object.getString("actores"),object.getString("directores"),object.getString("imagen"),object.getString("genero"));
 
-                        movies.add(movie);
+                        ClientActivity.this.movies.add(movie);
                     }
 
 

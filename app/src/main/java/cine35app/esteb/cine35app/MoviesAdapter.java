@@ -1,6 +1,7 @@
 package cine35app.esteb.cine35app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -23,10 +25,12 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
     private Context context;
     private List<Pelicula> movies;
+    private String currentUser;
 
-    public MoviesAdapter(Context context, List<Pelicula> movies) {
+    public MoviesAdapter(Context context, List<Pelicula> movies, String user) {
         this.context = context;
         this.movies = movies;
+        this.currentUser=user;
     }
 
     @Override
@@ -91,15 +95,27 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.ViewHolder
 
         @Override
         public boolean onMenuItemClick(MenuItem menuItem) {
+            Queryphp q =  new Queryphp("");
             switch (menuItem.getItemId()) {
                 case R.id.action_favourite:
-                    Toast.makeText(context, movies.get(pos).getNombre()+" is added to favourite", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, movies.get(pos).getNombre()+" is added to favorite", Toast.LENGTH_SHORT).show();
+                    q.setQuery("addfavorite.php?id="+movies.get(pos).getId()+"&user='"+currentUser+"'");
+                    try {
+                        q.returnRequest();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     return true;
-                case R.id.action_watch:
-                    Toast.makeText(context, movies.get(pos).getNombre()+" is added to watchlist", Toast.LENGTH_SHORT).show();
+                case R.id.action_rate:
+                    Toast.makeText(context, movies.get(pos).getNombre()+" is rated", Toast.LENGTH_SHORT).show();
                     return true;
-                case R.id.action_book:
-                    Toast.makeText(context, "Booked Ticket for "+movies.get(pos).getNombre(), Toast.LENGTH_SHORT).show();
+                case R.id.action_comment:
+                    Intent pIntent = new Intent(context, ComentsActivity.class);
+                    pIntent.putExtra("idpelicula",movies.get(pos).getId());
+                    context.startActivity(pIntent);
+                    return true;
+                case R.id.action_see_data:
+                    Toast.makeText(context, "WIP "+movies.get(pos).getNombre(), Toast.LENGTH_SHORT).show();
                     return true;
                 default:
             }

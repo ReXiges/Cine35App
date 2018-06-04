@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cine35App</string>
     <string name="loginError">Usuario invalido</string>
+    <string name="title_activity_coments">Coments</string>
 </resources>
